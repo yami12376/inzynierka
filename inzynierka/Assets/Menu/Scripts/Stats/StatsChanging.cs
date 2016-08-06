@@ -3,6 +3,8 @@ using System.Collections;
 
 public class StatsChanging : MonoBehaviour {
 
+	public string levelToLoad;
+
 		void Start()
 		{
 			Stats.Cheating = 0;
@@ -56,7 +58,7 @@ public class StatsChanging : MonoBehaviour {
 				Stats.StartCheating = Stats.Cheating;
 				Stats.StartKnowledge = Stats.Knowledge;
 
-				Application.LoadLevel ("chodzenie");
+			Application.LoadLevel (levelToLoad);
 			}
 		}
 	}
