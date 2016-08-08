@@ -1,12 +1,10 @@
 fileFormatVersion: 2
-guid: cfd7bab009da206438dca63e4d7a94bb
-timeCreated: 1470599346
+guid: db1872e062e91e241b032524f7c5473d
+timeCreated: 1470685625
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: tiles_0
-    21300002: tiles_1
-    21300004: candyshop_0
+    21300000: young_boy_ow___bw_style_by_putillabarata-d5jjgkf_0
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -53,47 +51,24 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: tiles_0
+    - name: young_boy_ow___bw_style_by_putillabarata-d5jjgkf_0
       rect:
         serializedVersion: 2
-        x: 96
-        y: 416
+        x: 16
+        y: 194
         width: 32
-        height: 32
+        height: 44
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -16, y: 16}
-        - {x: -16, y: -16}
-        - {x: 16, y: -16}
-        - {x: 16, y: 16}
-    - name: tiles_1
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 448
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -16, y: 16}
-        - {x: -16, y: -16}
-        - {x: 16, y: -16}
-        - {x: 16, y: 16}
-    - name: candyshop_0
-      rect:
-        serializedVersion: 2
-        x: 97
-        y: 173
-        width: 27
-        height: 24
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
+      - - {x: -11, y: 22}
+        - {x: -16, y: 14}
+        - {x: -16, y: -7}
+        - {x: -13, y: -22}
+        - {x: 16, y: -22}
+        - {x: 16, y: 19}
+        - {x: 10, y: 22}
     outline: []
   spritePackingTag: 
   userData: 
