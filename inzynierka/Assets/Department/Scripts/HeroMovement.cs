@@ -8,20 +8,30 @@ public class HeroMovement : MonoBehaviour
 {
 	
 	public float speed = 0.1f;
+	private Animator animator;
+
+	void Start ()
+	{
+
+		animator = GetComponent<Animator> ();
+
+	}
 
 
 	void FixedUpdate ()
 	{
-		if (Input.GetKey ("up"))
-			this.GetComponent<Transform> ().transform.position += new Vector3 (0, speed, 0);
+		float input_x = Input.GetAxisRaw ("Horizontal");
+		float input_y = Input.GetAxisRaw ("Vertical");
 
-		if (Input.GetKey ("down"))
-			this.GetComponent<Transform> ().transform.position -= new Vector3 (0, speed, 0);
+		bool isWalking = (Mathf.Abs (input_x) + Mathf.Abs (input_y)) > 0;
 
-		if (Input.GetKey ("left"))
-			this.GetComponent<Transform> ().transform.position -= new Vector3 (speed, 0, 0);
+		animator.SetBool ("isWalking", isWalking);
 
-		if (Input.GetKey ("right"))
-			this.GetComponent<Transform> ().transform.position += new Vector3 (speed, 0, 0);
+		if (isWalking) {
+			animator.SetFloat ("x", input_x);
+			animator.SetFloat ("y", input_y);
+
+			transform.position += new Vector3 (input_x, input_y, 0).normalized * Time.deltaTime * 5;
+		}
 	}
 }
