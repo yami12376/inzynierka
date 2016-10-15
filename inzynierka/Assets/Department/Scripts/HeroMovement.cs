@@ -9,17 +9,37 @@ public class HeroMovement : MonoBehaviour
 	
 	public float speed = 0.1f;
 	private Animator animator;
+	private bool running;
+	private float defaultSpeed;
 
 	void Start ()
 	{
 
 		animator = GetComponent<Animator> ();
+		defaultSpeed = speed;
 
 	}
 
 
 	void FixedUpdate ()
 	{
+
+		if (Input.GetKey(KeyCode.LeftShift)) {
+			running = true;
+		}
+		else if (!Input.GetKey(KeyCode.LeftShift)) {
+			running = false;
+		}
+
+
+		if (running) {
+			speed = defaultSpeed * 2;
+		}
+		else{
+			speed = defaultSpeed;
+		}
+
+
 		float input_x = Input.GetAxisRaw ("Horizontal");
 		float input_y = Input.GetAxisRaw ("Vertical");
 
@@ -31,7 +51,7 @@ public class HeroMovement : MonoBehaviour
 			animator.SetFloat ("x", input_x);
 			animator.SetFloat ("y", input_y);
 
-			transform.position += new Vector3 (input_x, input_y, 0).normalized * Time.deltaTime * 5;
+			transform.position += new Vector3 (input_x, input_y, 0).normalized * Time.deltaTime * speed;
 		}
 	}
 }
