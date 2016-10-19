@@ -1,0 +1,369 @@
+fileFormatVersion: 2
+guid: db1872e062e91e241b032524f7c5473d
+timeCreated: 1476902215
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Idle Down
+    21300002: Walking Down
+    21300004: walk_down_1
+    21300006: Walking Down 2
+    21300008: Idle Left
+    21300010: Walking Left
+    21300012: walk_left_1
+    21300014: Walking Left 2
+    21300016: Idle Right
+    21300018: Walking Right
+    21300020: Walking Right 1
+    21300022: Walking Right 2
+    21300024: Idle Up
+    21300026: Walking Up
+    21300028: Walking Up 1
+    21300030: Walking Up 2
+    21300032: Walking Down 1
+    21300034: Walking Left 1
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 8
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Idle Down
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 194
+        width: 32
+        height: 44
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -11, y: 22}
+        - {x: -16, y: 14}
+        - {x: -16, y: -7}
+        - {x: -13, y: -22}
+        - {x: 16, y: -22}
+        - {x: 16, y: 19}
+        - {x: 10, y: 22}
+    - name: Walking Down
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 192
+        width: 32
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -16, y: 24}
+        - {x: -16, y: -21}
+        - {x: -15, y: -24}
+        - {x: 5, y: -24}
+        - {x: 13, y: -15}
+        - {x: 16, y: -9}
+        - {x: 16, y: 24}
+    - name: Walking Down 1
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 194
+        width: 32
+        height: 44
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -11, y: 22}
+        - {x: -16, y: 14}
+        - {x: -16, y: -7}
+        - {x: -13, y: -22}
+        - {x: 16, y: -22}
+        - {x: 16, y: 19}
+        - {x: 10, y: 22}
+    - name: Walking Down 2
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 192
+        width: 32
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -14, y: 24}
+        - {x: -16, y: 23}
+        - {x: -16, y: -9}
+        - {x: -5, y: -24}
+        - {x: 10, y: -24}
+        - {x: 16, y: -18}
+        - {x: 16, y: 24}
+    - name: Idle Left
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 130
+        width: 32
+        height: 44
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -15, y: 22}
+        - {x: -16, y: 21}
+        - {x: -16, y: -9}
+        - {x: -8, y: -22}
+        - {x: 9, y: -22}
+        - {x: 16, y: -15}
+        - {x: 16, y: 20}
+        - {x: 15, y: 22}
+    - name: Walking Left
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 130
+        width: 32
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -16, y: 23}
+        - {x: -16, y: -16}
+        - {x: -12, y: -23}
+        - {x: 13, y: -23}
+        - {x: 16, y: -10}
+        - {x: 16, y: 23}
+    - name: Walking Left 1
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 130
+        width: 32
+        height: 44
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -15, y: 22}
+        - {x: -16, y: 21}
+        - {x: -16, y: -9}
+        - {x: -8, y: -22}
+        - {x: 9, y: -22}
+        - {x: 16, y: -15}
+        - {x: 16, y: 20}
+        - {x: 15, y: 22}
+    - name: Walking Left 2
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 130
+        width: 32
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -11, y: 23}
+        - {x: -16, y: 19}
+        - {x: -16, y: -9}
+        - {x: -14, y: -23}
+        - {x: 14, y: -23}
+        - {x: 16, y: -19}
+        - {x: 16, y: 23}
+    - name: Idle Right
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 66
+        width: 32
+        height: 44
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -15, y: 22}
+        - {x: -16, y: 20}
+        - {x: -16, y: -4}
+        - {x: -7, y: -22}
+        - {x: 11, y: -22}
+        - {x: 15, y: -21}
+        - {x: 16, y: -9}
+        - {x: 16, y: 17}
+        - {x: 12, y: 22}
+    - name: Walking Right
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 66
+        width: 32
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -15, y: 23}
+        - {x: -16, y: 22}
+        - {x: -16, y: -23}
+        - {x: 14, y: -23}
+        - {x: 16, y: -8}
+        - {x: 16, y: 19}
+        - {x: 12, y: 23}
+    - name: Walking Right 1
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 66
+        width: 32
+        height: 44
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -15, y: 22}
+        - {x: -16, y: 20}
+        - {x: -16, y: -4}
+        - {x: -7, y: -22}
+        - {x: 11, y: -22}
+        - {x: 15, y: -21}
+        - {x: 16, y: -9}
+        - {x: 16, y: 17}
+        - {x: 12, y: 22}
+    - name: Walking Right 2
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 66
+        width: 32
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -15, y: 23}
+        - {x: -16, y: 22}
+        - {x: -16, y: -17}
+        - {x: -10, y: -23}
+        - {x: 15, y: -23}
+        - {x: 16, y: -9}
+        - {x: 16, y: 18}
+        - {x: 12, y: 23}
+    - name: Idle Up
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 2
+        width: 32
+        height: 44
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -11, y: 22}
+        - {x: -16, y: 14}
+        - {x: -16, y: -7}
+        - {x: -13, y: -22}
+        - {x: 16, y: -22}
+        - {x: 16, y: 19}
+        - {x: 10, y: 22}
+    - name: Walking Up
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 0
+        width: 32
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -16, y: 24}
+        - {x: -16, y: -13}
+        - {x: -12, y: -24}
+        - {x: 10, y: -24}
+        - {x: 16, y: -12}
+        - {x: 16, y: 24}
+    - name: Walking Up 1
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 2
+        width: 32
+        height: 44
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -11, y: 22}
+        - {x: -16, y: 14}
+        - {x: -16, y: -7}
+        - {x: -13, y: -22}
+        - {x: 16, y: -22}
+        - {x: 16, y: 19}
+        - {x: 10, y: 22}
+    - name: Walking Up 2
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 0
+        width: 32
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -13, y: 24}
+        - {x: -16, y: 23}
+        - {x: -16, y: -16}
+        - {x: -12, y: -24}
+        - {x: 11, y: -24}
+        - {x: 16, y: -17}
+        - {x: 16, y: 18}
+        - {x: 13, y: 24}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

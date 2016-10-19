@@ -19,7 +19,6 @@ public class GameStart : MonoBehaviour
 
 		foreach (GameObject classNumber in classNumbers) {
 			classNumber.GetComponentInChildren<Text> ().text = "sala200" + randomNumbers.ElementAt (i);
-			Debug.Log (randomNumbers.ElementAt (i));
 			i++;
 		}
 	}

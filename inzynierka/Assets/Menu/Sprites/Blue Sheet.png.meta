@@ -1,12 +1,14 @@
 fileFormatVersion: 2
-guid: cfd7bab009da206438dca63e4d7a94bb
-timeCreated: 1476902035
+guid: 6fa774584a778d649a05b01f993d5845
+timeCreated: 1476901653
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Black Tile
-    21300002: Green Tile
-    21300004: Flowers
+    21300000: Arrow Up
+    21300002: Arrow Down
+    21300004: Arrow Right
+    21300006: Arrow Left
+    21300008: Accept Button
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -47,53 +49,72 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 8
+  spritePixelsToUnits: 100
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: Black Tile
+    - name: Arrow Up
       rect:
         serializedVersion: 2
-        x: 96
-        y: 416
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -16, y: 16}
-        - {x: -16, y: -16}
-        - {x: 16, y: -16}
-        - {x: 16, y: 16}
-    - name: Green Tile
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 448
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -16, y: 16}
-        - {x: -16, y: -16}
-        - {x: 16, y: -16}
-        - {x: 16, y: 16}
-    - name: Flowers
-      rect:
-        serializedVersion: 2
-        x: 97
-        y: 173
+        x: 389
+        y: 145
         width: 27
-        height: 24
+        height: 39
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+    - name: Arrow Down
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 145
+        width: 28
+        height: 39
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Arrow Right
+      rect:
+        serializedVersion: 2
+        x: 379
+        y: 85
+        width: 39
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Arrow Left
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 85
+        width: 40
+        height: 29
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Accept Button
+      rect:
+        serializedVersion: 2
+        x: 381
+        y: 184
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -18, y: 18}
+        - {x: -18, y: -17}
+        - {x: -17, y: -18}
+        - {x: 18, y: -18}
+        - {x: 18, y: 18}
     outline: []
   spritePackingTag: 
   userData: 
