@@ -5,7 +5,7 @@ using System.Linq;
 
 public class GameStart : MonoBehaviour
 {
-	private GameObject[] classNumbers;
+	private Text[] classNumbers;
 	private System.Random rnd = new System.Random ();
 
 	void Start ()
@@ -13,12 +13,12 @@ public class GameStart : MonoBehaviour
 
 		var randomNumbers = Enumerable.Range (1, 9).OrderBy (x => rnd.Next ()).Take (9).ToList ();
 	
-		classNumbers = GameObject.FindGameObjectsWithTag ("Class Number");
+		classNumbers = GameObject.FindGameObjectWithTag("Canvases").GetComponentsInChildren<Text>();
 
 		int i = 0;
 
-		foreach (GameObject classNumber in classNumbers) {
-			classNumber.GetComponentInChildren<Text> ().text = "sala200" + randomNumbers.ElementAt (i);
+		foreach (Text classNumber in classNumbers) {
+			classNumber.text = "sala200" + randomNumbers.ElementAt (i);
 			i++;
 		}
 	}
