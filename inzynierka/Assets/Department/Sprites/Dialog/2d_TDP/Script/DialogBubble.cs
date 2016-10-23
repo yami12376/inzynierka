@@ -138,6 +138,8 @@ public class DialogBubble : MonoBehaviour
 
 		if (hit.collider != null && Input.GetMouseButtonDown (0)) {
 
+			Debug.Log ("hit c: " + hit.collider);
+
 			// jeden dymek na raz tylko:
 			int x = (GameObject.FindGameObjectsWithTag ("Bubble")).Length;
 			Debug.Log ("ilosc: " + x);
