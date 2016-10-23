@@ -8,8 +8,6 @@ using AssemblyCSharp;
 
 public class DialogBubble : MonoBehaviour
 {
-	public Camera camera;
-
 	Ray ray;
 	RaycastHit hit;
 	public GameObject vCurrentBubble = null;
@@ -17,6 +15,9 @@ public class DialogBubble : MonoBehaviour
 	public bool IsTalking = false;
 	public List<PixelBubble> vBubble = new List<PixelBubble> ();
 	private PixelBubble activeBubble = null;
+
+	public GameObject prefab;
+	public GameObject prefab2;
 
 	//show the right bubble on the current character
 	void ShowBubble (DialogBubble vcharacter)
@@ -70,12 +71,14 @@ public class DialogBubble : MonoBehaviour
 				//create a rectangle or round bubble
 				if (vBubble.vMessageForm == BubbleType.Rectangle) {
 					//create bubble
-					vBubbleObject = Instantiate (Resources.Load<GameObject> ("Customs/BubbleRectangle"));
+					vBubbleObject = (GameObject)Instantiate (prefab, vcharacter.transform.position + new Vector3 (5f, 5f, 0f)
+						, Quaternion.identity);
 					vBubbleObject.transform.position = 
 						vcharacter.transform.position + new Vector3 (5f, 5f, 0f); //move a little bit the teleport particle effect
 				} else {
 					//create bubble
-					vBubbleObject = Instantiate (Resources.Load<GameObject> ("Customs/BubbleRound"));
+					vBubbleObject = (GameObject)Instantiate (prefab2, vcharacter.transform.position + new Vector3 (0.15f, 5f, 0f)
+						, Quaternion.identity);
 					vBubbleObject.transform.position = 
 						vcharacter.transform.position + new Vector3 (0.15f, 5f, 0f); //move a little bit the teleport particle effect
 				}
