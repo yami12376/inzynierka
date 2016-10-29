@@ -14,10 +14,8 @@ public class DialogBubble : MonoBehaviour
 	public GameObject vCurrentBubble = null;
 	public float timeToCloseBubble;
 	//just to make sure we cannot open multiple bubble at the same time.
-	public bool IsTalking = false;
 	public List<PixelBubble> bubblesList = new List<PixelBubble> ();
 	private PixelBubble activeBubble = null;
-
 
 
 	public GameObject prefab;
@@ -98,21 +96,16 @@ public class DialogBubble : MonoBehaviour
 		if (activeBubble != null) {
 			if (activeBubble.vClickToCloseBubble) {
 				//get the function to close bubble
-				Appear vAppear = dialogBubble.vCurrentBubble.GetComponent<Appear> ();
-				vAppear.valpha = 0f;
-				vAppear.vchoice = false; //close bubble
-
-				//check if last bubble
-				if (activeBubble == dialogBubble.bubblesList.Last ())
-					dialogBubble.IsTalking = false;
+				if (dialogBubble.vCurrentBubble != null) {
+					Appear vAppear = dialogBubble.vCurrentBubble.GetComponent<Appear> ();
+					vAppear.dontCloseBubble = false; //close bubble
+				}
 			}
 		}
 
 		foreach (PixelBubble bubblesList in dialogBubble.bubblesList) {
 			//make sure the bubble isn't already opened
 			if (dialogBubble.vCurrentBubble == null) {
-				//make the character in talking status
-				dialogBubble.IsTalking = true;
 
 				//cut the message into 24 characters
 				string vTrueMessage = "";
@@ -161,7 +154,7 @@ public class DialogBubble : MonoBehaviour
 			if (this.transform.childCount == 1) { // odwołujemy się do NPC, który ma już włączoną chmurkę
 
 				if (hit.transform == this.transform
-					|| hit.transform == this.transform.GetChild (0).transform) { // spr. czy klikamy na postać czy jego chmurkę 
+				    || hit.transform == this.transform.GetChild (0).transform) { // spr. czy klikamy na postać czy jego chmurkę 
 					Debug.Log ("hit transform parent test: " + hit.transform.parent);
 					// czy skoro jest już ta chmurka to kliknelismy w chmurke czy gracza:
 					// hierarchia dziedziczenia: NPCs->NPCx->Chmurka
@@ -186,10 +179,6 @@ public class DialogBubble : MonoBehaviour
 					}
 				}
 			}
-			//can't have a current character 
-			if (!IsTalking) {			
-				activeBubble = null;
-			}  
 		}
 	}
 }

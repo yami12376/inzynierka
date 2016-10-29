@@ -4,74 +4,63 @@ using System.Collections.Generic;
 using AssemblyCSharp;
 
 
-public class Appear : MonoBehaviour {
+public class Appear : MonoBehaviour
+{
 
 	private List<SpriteRenderer> vImages;
-	public float valpha = 0f;
-	public bool vchoice = true;
+	public bool dontCloseBubble = true;
 	public bool needToClick = false;
 
-	void Start () {
+	void Start ()
+	{
 
 		vImages = new List<SpriteRenderer> ();
 
 		//get all image below the main Object
-		foreach (Transform child in transform)
-		{
-			SpriteRenderer vRenderer = child.GetComponent<SpriteRenderer> ();
-			if (vRenderer != null)
-				vImages.Add (vRenderer);
+		foreach (Transform child in transform) {
+			SpriteRenderer spriteRenderer = child.GetComponent<SpriteRenderer> ();
+			if (spriteRenderer != null)
+				vImages.Add (spriteRenderer);
 		}
 	}
 
-	IEnumerator WaitInSeconds(float vseconds, string vChoice) {
-		yield return new WaitForSeconds(vseconds);
-		switch (vChoice) {
+	IEnumerator WaitInSeconds (float time, string choice)
+	{
+		yield return new WaitForSeconds (time);
+		switch (choice) {
 		case "False":
-			vchoice = false;
+			dontCloseBubble = false;
 			break;
 		}
 	}
 
 	//make the alpha appear
-	public void ImageAppear()
+	public void ImageAppear ()
 	{
-		foreach (SpriteRenderer vRenderer in vImages)
-			vRenderer.color = new Color (vRenderer.color.r, vRenderer.color.g, vRenderer.color.b, valpha);
-
-		if (vchoice)
-			valpha+=5f;
-		else 
-			valpha-=5f;
+		foreach (SpriteRenderer spriteRenderer in vImages)
+			spriteRenderer.color = new Color (spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, 200f);
+		// ostatni parametr vAlpha
 	}
 
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+	{
 		DialogBubble dialogBubbleScriptComponent = transform.parent.GetComponent<DialogBubble> ();
-		if ((vchoice && valpha < 255) || (!vchoice && valpha > 0)) {
+		Debug.Log (dontCloseBubble + " : dontClose");
+		if (dontCloseBubble) {
 			ImageAppear ();
-
-
-		}
-		else if (!vchoice && valpha<= 0)
-		{
-			
-
+		} else if (!dontCloseBubble) {
 			//before deleting himself, we tell the character this buble is no more
 			foreach (PixelBubble bubble in transform.parent.GetComponent<DialogBubble>().bubblesList)
-				if (dialogBubbleScriptComponent.vCurrentBubble == this.gameObject && !bubble.vClickToCloseBubble) //remove current bubble ONLY if it must dissappear by itself
-				{
+				if (dialogBubbleScriptComponent.vCurrentBubble == this.gameObject && !bubble.vClickToCloseBubble) { //remove current bubble ONLY if it must dissappear by itself
 					dialogBubbleScriptComponent.vCurrentBubble = null; //remove it
-					dialogBubbleScriptComponent.IsTalking = false;
 				}
 
 			//destroy itself
 			GameObject.Destroy (this.gameObject); 
 		}
-		else if ((valpha == 255f) &&(!needToClick))
-		{
-			valpha = 254f;
-			StartCoroutine(WaitInSeconds(dialogBubbleScriptComponent.timeToCloseBubble, "False"));
+		if (!needToClick) {
+			StartCoroutine (WaitInSeconds (dialogBubbleScriptComponent.timeToCloseBubble, "False"));
 		}
-	}		
+	}
 }
