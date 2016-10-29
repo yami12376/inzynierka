@@ -20,7 +20,7 @@ public class DialogBubble : MonoBehaviour
 	public GameObject prefab2;
 
 
-	private GameObject InstantiateBubble(PixelBubble bubblesList, DialogBubble vcharacter)
+	private GameObject InstantiateBubble (PixelBubble bubblesList, DialogBubble vcharacter)
 	{
 		GameObject bubblesListObject = null;
 
@@ -42,7 +42,7 @@ public class DialogBubble : MonoBehaviour
 		return bubblesListObject;
 	}
 
-	private void RenderBodyOfBubble(GameObject bubblesListObject, PixelBubble bubblesList, string vTrueMessage)
+	private void RenderBodyOfBubble (GameObject bubblesListObject, PixelBubble bubblesList, string vTrueMessage)
 	{
 
 		Color vNewBodyColor = new Color (bubblesList.vBodyColor.r, bubblesList.vBodyColor.g, bubblesList.vBodyColor.b, 0f);
@@ -130,7 +130,7 @@ public class DialogBubble : MonoBehaviour
 				}
 				vTrueMessage += cLine; //add the last word
 
-				GameObject bubblesListObject = InstantiateBubble(bubblesList, vcharacter);
+				GameObject bubblesListObject = InstantiateBubble (bubblesList, vcharacter);
 
 				//show the mouse and wait for the user to left click OR NOT (if not, after 10 sec, it disappear)
 				bubblesListObject.GetComponent<Appear> ().needtoclick = bubblesList.vClickToCloseBubble;
@@ -155,19 +155,10 @@ public class DialogBubble : MonoBehaviour
 
 		if (hit.collider != null && Input.GetMouseButtonDown (0)) {
 
-			Debug.Log ("hit c: " + hit.collider);
-
-			// jeden dymek na raz tylko:
-			int x = (GameObject.FindGameObjectsWithTag ("Bubble")).Length;
-			Debug.Log ("ilosc: " + x);
-
-			Debug.Log ("ten obiekt ma: " + this.transform.childCount);
-
-			if (this.transform.childCount == 1) { // sprawdz czy odwołujemy się do NPC, który ma już włączoną chmurkę
-
+			if (this.transform.childCount == 1) { // odwołujemy się do NPC, który ma już włączoną chmurkę
 
 				if (hit.transform == this.transform
-					|| hit.transform == this.transform.GetChild(0).transform) { // spr. czy klikamy na postać lub jego chmurkę 
+				    || hit.transform == this.transform.GetChild (0).transform) { // spr. czy klikamy na postać czy jego chmurkę 
 					Debug.Log ("hit transform parent test: " + hit.transform.parent);
 					// czy skoro jest już ta chmurka to kliknelismy w chmurke czy gracza:
 					// hierarchia dziedziczenia: NPCs->NPCx->Chmurka
@@ -178,17 +169,16 @@ public class DialogBubble : MonoBehaviour
 						ShowBubble (hit.transform.GetComponent<DialogBubble> ());
 					}
 				}
-			} else { // odwołujemy się do innego NPC - bez chmurki 
+			} else { // odwołujemy się do NPC, który nie ma aktywnej chmurki 
 
 				int y = (GameObject.FindGameObjectsWithTag ("Bubble")).Length;
 				Debug.Log ("ilosc: " + y);
 
-				// && y < 1  -> z 1 osobą rozmawiać na raz - zaczynać chat ? 
-				if (hit.transform == this.transform && y < 1) { // to spr. którego klikamy jakby + czy nigdzie indziej nie ma aktywnej
-					// chmurki
+				if (hit.transform == this.transform && y < 1) { // to spr. którego klikamy + czy nigdzie indziej nie ma aktywnej
+					// chmurki  // && y < 1  -> z 1 osobą rozmawiać na raz można
 					//check the bubble on the character and make it appear!
-					Debug.Log("bubblesList " + bubblesList.Count);
-					if (bubblesList.Count > 0) { // jezeli trzeba pokazac wiecej niz 1 chmurke, to je pokaz.
+					Debug.Log ("bubblesList " + bubblesList.Count);
+					if (bubblesList.Count > 0) { // jezeli trzeba pokazac wiecej niz 0 chmurek, to je pokaz.
 						ShowBubble (hit.transform.GetComponent<DialogBubble> ());
 					}
 				}
