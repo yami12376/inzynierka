@@ -1,11 +1,11 @@
 fileFormatVersion: 2
 guid: cfd7bab009da206438dca63e4d7a94bb
-timeCreated: 1476902035
+timeCreated: 1477773303
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Black Tile
-    21300002: Green Tile
+    21300000: BlackTile
+    21300002: GreenTile
     21300004: Flowers
   serializedVersion: 2
   mipmaps:
@@ -53,7 +53,7 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: Black Tile
+    - name: BlackTile
       rect:
         serializedVersion: 2
         x: 96
@@ -68,10 +68,10 @@ TextureImporter:
         - {x: -16, y: -16}
         - {x: 16, y: -16}
         - {x: 16, y: 16}
-    - name: Green Tile
+    - name: GreenTile
       rect:
         serializedVersion: 2
-        x: 128
+        x: 129
         y: 448
         width: 32
         height: 32

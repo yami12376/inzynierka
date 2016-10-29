@@ -13,7 +13,6 @@ public class Appear : MonoBehaviour {
 	private float cTime = 0f;
 	public bool needtoclick = false;
 
-	// Use this for initialization
 	void Start () {
 
 		vImages = new List<SpriteRenderer> ();
@@ -57,8 +56,8 @@ public class Appear : MonoBehaviour {
 			DialogBubble vCharacter = transform.parent.GetComponent<DialogBubble>();
 
 			//before deleting himself, we tell the character this buble is no more
-			foreach (PixelBubble vBubble in transform.parent.GetComponent<DialogBubble>().vBubble)
-				if (vCharacter.vCurrentBubble == this.gameObject && !vBubble.vClickToCloseBubble) //remove current bubble ONLY if it must dissappear by itself
+			foreach (PixelBubble bubble in transform.parent.GetComponent<DialogBubble>().bubblesList)
+				if (vCharacter.vCurrentBubble == this.gameObject && !bubble.vClickToCloseBubble) //remove current bubble ONLY if it must dissappear by itself
 				{
 					vCharacter.vCurrentBubble = null; //remove it
 					vCharacter.IsTalking = false;

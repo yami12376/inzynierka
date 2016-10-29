@@ -1,14 +1,14 @@
 fileFormatVersion: 2
 guid: 6fa774584a778d649a05b01f993d5845
-timeCreated: 1476901653
+timeCreated: 1477773221
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Arrow Up
-    21300002: Arrow Down
-    21300004: Arrow Right
-    21300006: Arrow Left
-    21300008: Accept Button
+    21300000: ArrowUp
+    21300002: ArrowDown
+    21300004: ArrowRight
+    21300006: ArrowLeft
+    21300008: AcceptButton
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -55,7 +55,7 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: Arrow Up
+    - name: ArrowUp
       rect:
         serializedVersion: 2
         x: 389
@@ -66,7 +66,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: Arrow Down
+    - name: ArrowDown
       rect:
         serializedVersion: 2
         x: 416
@@ -77,7 +77,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: Arrow Right
+    - name: ArrowRight
       rect:
         serializedVersion: 2
         x: 379
@@ -88,7 +88,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: Arrow Left
+    - name: ArrowLeft
       rect:
         serializedVersion: 2
         x: 339
@@ -99,7 +99,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: Accept Button
+    - name: AcceptButton
       rect:
         serializedVersion: 2
         x: 381
