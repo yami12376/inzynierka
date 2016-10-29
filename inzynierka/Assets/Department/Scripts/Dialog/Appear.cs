@@ -9,8 +9,7 @@ public class Appear : MonoBehaviour {
 	private List<SpriteRenderer> vImages;
 	public float valpha = 0f;
 	public bool vchoice = true;
-	public float vTimer = 5f;
-	public bool needtoclick = false;
+	public bool needToClick = false;
 
 	void Start () {
 
@@ -28,8 +27,8 @@ public class Appear : MonoBehaviour {
 	IEnumerator WaitInSeconds(float vseconds, string vChoice) {
 		yield return new WaitForSeconds(vseconds);
 		switch (vChoice) {
-			case "False":
-				vchoice = false;
+		case "False":
+			vchoice = false;
 			break;
 		}
 	}
@@ -45,30 +44,34 @@ public class Appear : MonoBehaviour {
 		else 
 			valpha-=5f;
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-		if ((vchoice && valpha < 255) || (!vchoice && valpha > 0))
+		DialogBubble dialogBubbleScriptComponent = transform.parent.GetComponent<DialogBubble> ();
+		if ((vchoice && valpha < 255) || (!vchoice && valpha > 0)) {
 			ImageAppear ();
+
+
+		}
 		else if (!vchoice && valpha<= 0)
 		{
-			DialogBubble vCharacter = transform.parent.GetComponent<DialogBubble>();
+			
 
 			//before deleting himself, we tell the character this buble is no more
 			foreach (PixelBubble bubble in transform.parent.GetComponent<DialogBubble>().bubblesList)
-				if (vCharacter.vCurrentBubble == this.gameObject && !bubble.vClickToCloseBubble) //remove current bubble ONLY if it must dissappear by itself
+				if (dialogBubbleScriptComponent.vCurrentBubble == this.gameObject && !bubble.vClickToCloseBubble) //remove current bubble ONLY if it must dissappear by itself
 				{
-					vCharacter.vCurrentBubble = null; //remove it
-					vCharacter.IsTalking = false;
+					dialogBubbleScriptComponent.vCurrentBubble = null; //remove it
+					dialogBubbleScriptComponent.IsTalking = false;
 				}
 
 			//destroy itself
 			GameObject.Destroy (this.gameObject); 
 		}
-		else if ((valpha == 255f) &&(!needtoclick))
+		else if ((valpha == 255f) &&(!needToClick))
 		{
 			valpha = 254f;
-			StartCoroutine(WaitInSeconds(3f, "False"));
+			StartCoroutine(WaitInSeconds(dialogBubbleScriptComponent.timeToCloseBubble, "False"));
 		}
 	}		
 }

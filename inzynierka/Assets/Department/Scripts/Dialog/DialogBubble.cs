@@ -10,33 +10,37 @@ public class DialogBubble : MonoBehaviour
 {
 	Ray ray;
 	RaycastHit hit;
+
 	public GameObject vCurrentBubble = null;
+	public float timeToCloseBubble;
 	//just to make sure we cannot open multiple bubble at the same time.
 	public bool IsTalking = false;
 	public List<PixelBubble> bubblesList = new List<PixelBubble> ();
 	private PixelBubble activeBubble = null;
 
+
+
 	public GameObject prefab;
 	public GameObject prefab2;
 
 
-	private GameObject InstantiateBubble (PixelBubble bubblesList, DialogBubble vcharacter)
+	private GameObject InstantiateBubble (PixelBubble bubblesList, DialogBubble dialogBubble)
 	{
 		GameObject bubblesListObject = null;
 
 		//create a rectangle or round bubble
 		if (bubblesList.vMessageForm == BubbleType.Rectangle) {
 			//create bubble
-			bubblesListObject = (GameObject)Instantiate (prefab, vcharacter.transform.position + new Vector3 (5f, 5f, 0f)
+			bubblesListObject = (GameObject)Instantiate (prefab, dialogBubble.transform.position + new Vector3 (5f, 5f, 0f)
 				, Quaternion.identity);
 			bubblesListObject.transform.position = 
-				vcharacter.transform.position + new Vector3 (5f, 5f, 0f); //move a little bit the teleport particle effect
+				dialogBubble.transform.position + new Vector3 (5f, 5f, 0f); //move a little bit the teleport particle effect
 		} else {
 			//create bubble
-			bubblesListObject = (GameObject)Instantiate (prefab2, vcharacter.transform.position + new Vector3 (0.15f, 5f, 0f)
+			bubblesListObject = (GameObject)Instantiate (prefab2, dialogBubble.transform.position + new Vector3 (0.15f, 5f, 0f)
 				, Quaternion.identity);
 			bubblesListObject.transform.position = 
-				vcharacter.transform.position + new Vector3 (0.15f, 5f, 0f); //move a little bit the teleport particle effect
+				dialogBubble.transform.position + new Vector3 (0.15f, 5f, 0f); //move a little bit the teleport particle effect
 		}
 
 		return bubblesListObject;
@@ -88,28 +92,27 @@ public class DialogBubble : MonoBehaviour
 
 
 	//show the right bubble on the current character
-	void ShowBubble (DialogBubble vcharacter)
+	void ShowBubble (DialogBubble dialogBubble)
 	{
 		//if vcurrentbubble is still there, just close it
 		if (activeBubble != null) {
 			if (activeBubble.vClickToCloseBubble) {
 				//get the function to close bubble
-				Appear vAppear = vcharacter.vCurrentBubble.GetComponent<Appear> ();
+				Appear vAppear = dialogBubble.vCurrentBubble.GetComponent<Appear> ();
 				vAppear.valpha = 0f;
-				vAppear.vTimer = 0f; //instantly
 				vAppear.vchoice = false; //close bubble
 
 				//check if last bubble
-				if (activeBubble == vcharacter.bubblesList.Last ())
-					vcharacter.IsTalking = false;
+				if (activeBubble == dialogBubble.bubblesList.Last ())
+					dialogBubble.IsTalking = false;
 			}
 		}
 
-		foreach (PixelBubble bubblesList in vcharacter.bubblesList) {
+		foreach (PixelBubble bubblesList in dialogBubble.bubblesList) {
 			//make sure the bubble isn't already opened
-			if (vcharacter.vCurrentBubble == null) {
+			if (dialogBubble.vCurrentBubble == null) {
 				//make the character in talking status
-				vcharacter.IsTalking = true;
+				dialogBubble.IsTalking = true;
 
 				//cut the message into 24 characters
 				string vTrueMessage = "";
@@ -130,18 +133,18 @@ public class DialogBubble : MonoBehaviour
 				}
 				vTrueMessage += cLine; //add the last word
 
-				GameObject bubblesListObject = InstantiateBubble (bubblesList, vcharacter);
+				GameObject bubblesListObject = InstantiateBubble (bubblesList, dialogBubble);
 
-				//show the mouse and wait for the user to left click OR NOT (if not, after 10 sec, it disappear)
-				bubblesListObject.GetComponent<Appear> ().needtoclick = bubblesList.vClickToCloseBubble;
+				//show the mouse and wait for the user to left click OR NOT (if not, after 3 sec, it disappear)
+				bubblesListObject.GetComponent<Appear> ().needToClick = bubblesList.vClickToCloseBubble;
 
 				RenderBodyOfBubble (bubblesListObject, bubblesList, vTrueMessage);
 
-				vcharacter.vCurrentBubble = bubblesListObject; //attach it to the player
-				bubblesListObject.transform.parent = vcharacter.transform; //make him his parent
+				dialogBubble.vCurrentBubble = bubblesListObject; //attach it to the player
+				bubblesListObject.transform.parent = dialogBubble.transform; //make him his parent
 			} else if (activeBubble == bubblesList && activeBubble.vClickToCloseBubble) {
 				//gotonextbubble = true;
-				vcharacter.vCurrentBubble = null;
+				dialogBubble.vCurrentBubble = null;
 			}
 		}
 	}
@@ -158,7 +161,7 @@ public class DialogBubble : MonoBehaviour
 			if (this.transform.childCount == 1) { // odwołujemy się do NPC, który ma już włączoną chmurkę
 
 				if (hit.transform == this.transform
-				    || hit.transform == this.transform.GetChild (0).transform) { // spr. czy klikamy na postać czy jego chmurkę 
+					|| hit.transform == this.transform.GetChild (0).transform) { // spr. czy klikamy na postać czy jego chmurkę 
 					Debug.Log ("hit transform parent test: " + hit.transform.parent);
 					// czy skoro jest już ta chmurka to kliknelismy w chmurke czy gracza:
 					// hierarchia dziedziczenia: NPCs->NPCx->Chmurka
@@ -186,7 +189,7 @@ public class DialogBubble : MonoBehaviour
 			//can't have a current character 
 			if (!IsTalking) {			
 				activeBubble = null;
-			} 
+			}  
 		}
 	}
 }
