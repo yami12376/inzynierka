@@ -20,12 +20,12 @@ namespace AssemblyCSharp
 	public class PixelBubble
 	{
 		//main message in the bubble
-		public string vMessage = ""; 
-		public BubbleType vMessageForm = BubbleType.Rectangle;
-		public Color vBorderColor = Color.black;
-		public Color vBodyColor = Color.white;
-		public Color vFontColor = Color.black;
-		public bool vClickToCloseBubble = false;
+		public string message = ""; 
+		public BubbleType messageForm = BubbleType.Rectangle;
+		public Color borderColor = Color.black;
+		public Color bodyColor = Color.white;
+		public Color fontColor = Color.black;
+		public bool clickToCloseBubble = false;
 	}
 }
 

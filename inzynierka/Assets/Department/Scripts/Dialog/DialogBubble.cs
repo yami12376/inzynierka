@@ -11,12 +11,10 @@ public class DialogBubble : MonoBehaviour
 	Ray ray;
 	RaycastHit hit;
 
-	public GameObject vCurrentBubble = null;
+	public GameObject currentBubble = null;
 	public float timeToCloseBubble;
-	//just to make sure we cannot open multiple bubble at the same time.
 	public List<PixelBubble> bubblesList = new List<PixelBubble> ();
 	private PixelBubble activeBubble = null;
-
 
 	public GameObject prefab;
 	public GameObject prefab2;
@@ -24,67 +22,79 @@ public class DialogBubble : MonoBehaviour
 
 	private GameObject InstantiateBubble (PixelBubble bubblesList, DialogBubble dialogBubble)
 	{
-		GameObject bubblesListObject = null;
+		GameObject newBubbleDialogObject = null;
 
 		//create a rectangle or round bubble
-		if (bubblesList.vMessageForm == BubbleType.Rectangle) {
-			//create bubble
-			bubblesListObject = (GameObject)Instantiate (prefab, dialogBubble.transform.position + new Vector3 (5f, 5f, 0f)
+		if (bubblesList.messageForm == BubbleType.Rectangle) {
+			newBubbleDialogObject = (GameObject)Instantiate (prefab, dialogBubble.transform.position + new Vector3 (4f, 4.25f, 0f)
 				, Quaternion.identity);
-			bubblesListObject.transform.position = 
-				dialogBubble.transform.position + new Vector3 (5f, 5f, 0f); //move a little bit the teleport particle effect
 		} else {
-			//create bubble
-			bubblesListObject = (GameObject)Instantiate (prefab2, dialogBubble.transform.position + new Vector3 (0.15f, 5f, 0f)
+			newBubbleDialogObject = (GameObject)Instantiate (prefab2, dialogBubble.transform.position + new Vector3 (0.25f, 4.5f, 0f)
 				, Quaternion.identity);
-			bubblesListObject.transform.position = 
-				dialogBubble.transform.position + new Vector3 (0.15f, 5f, 0f); //move a little bit the teleport particle effect
 		}
 
-		return bubblesListObject;
+		return newBubbleDialogObject;
 	}
 
-	private void RenderBodyOfBubble (GameObject bubblesListObject, PixelBubble bubblesList, string vTrueMessage)
+	private void RenderBodyOfBubble (GameObject pixelBubbleObject, PixelBubble pixelBubble, string trueMessage)
 	{
-
-		Color vNewBodyColor = new Color (bubblesList.vBodyColor.r, bubblesList.vBodyColor.g, bubblesList.vBodyColor.b, 0f);
-		Color vNewBorderColor = new Color (bubblesList.vBorderColor.r, bubblesList.vBorderColor.g, bubblesList.vBorderColor.b, 0f);
-		Color vNewFontColor = new Color (bubblesList.vFontColor.r, bubblesList.vFontColor.g, bubblesList.vFontColor.b, 255f);
+		Color newBodyColor = new Color (pixelBubble.bodyColor.r, pixelBubble.bodyColor.g, pixelBubble.bodyColor.b, 255f);
+		Color newBorderColor = new Color (pixelBubble.borderColor.r, pixelBubble.borderColor.g, pixelBubble.borderColor.b, 255f);
+		Color newFontColor = new Color (pixelBubble.fontColor.r, pixelBubble.fontColor.g, pixelBubble.fontColor.b, 255f);
 
 		//get all image below the main Object
-		foreach (Transform child in bubblesListObject.transform) {
-			SpriteRenderer vRenderer = child.GetComponent<SpriteRenderer> ();
-			TextMesh vTextMesh = child.GetComponent<TextMesh> ();
+		foreach (Transform child in pixelBubbleObject.transform) {
+			SpriteRenderer spriteRenderer = child.GetComponent<SpriteRenderer> ();
+			TextMesh textMesh = child.GetComponent<TextMesh> ();
 
-			if (vRenderer != null && child.name.Contains ("Body")) {
-				//change the body color
-				vRenderer.color = vNewBodyColor;
+			if (spriteRenderer != null && child.name.Contains ("Body")) {
+				spriteRenderer.color = newBodyColor; //change the body color
 
-				if (vRenderer.sortingOrder < 10)
-					vRenderer.sortingOrder = 1500;
-			} else if (vRenderer != null && child.name.Contains ("Border")) {
-				//change the border color
-				vRenderer.color = vNewBorderColor;
-				if (vRenderer.sortingOrder < 10)
-					vRenderer.sortingOrder = 1501;
-			} else if (vTextMesh != null && child.name.Contains ("Message")) {
+			} else if (spriteRenderer != null && child.name.Contains ("Border")) {
+				spriteRenderer.color = newBorderColor; 	//change the border color
+
+			} else if (textMesh != null && child.name.Contains ("Message")) {
 				//change the message and show it in front of everything
-				vTextMesh.color = vNewFontColor;
-				vTextMesh.text = vTrueMessage;
-				child.GetComponent<MeshRenderer> ().sortingOrder = 1550;
+				textMesh.color = newFontColor;
+				textMesh.text = trueMessage;
 
-				Transform vMouseIcon = child.FindChild ("MouseIcon");
-				if (vMouseIcon != null && !bubblesList.vClickToCloseBubble)
-					vMouseIcon.gameObject.SetActive (false);
+				Transform mouseIcon = child.FindChild ("MouseIcon");
+				if (mouseIcon != null && !pixelBubble.clickToCloseBubble) {
+					mouseIcon.gameObject.SetActive (false);
+				}
 			}
 
 			//disable the mouse icon because it will close by itself
-			if (child.name == "MouseIcon" && !bubblesList.vClickToCloseBubble) {
+			if (child.name == "MouseIcon" && !pixelBubble.clickToCloseBubble) {
 				child.gameObject.SetActive (false);
 			} else {
-				activeBubble = bubblesList; //keep the active bubble and wait for the Left Click
+				activeBubble = pixelBubble; //keep the active bubble and wait for the Left Click
 			}
 		}
+	}
+
+	public string ModifyTextFromComponentByAddindNewLineAfterWords(PixelBubble pixelBubble)
+	{
+		//cut the message into 24 characters
+		string trueMessage = "";
+		string line = "";
+		int limit = 20;
+		if (pixelBubble.messageForm == BubbleType.Round) {
+			limit = 15;
+		}
+
+		//cut each word in a text in 24 characters.
+		foreach (string word in pixelBubble.message.Split(' ')) {
+			if (line.Length + word.Length > limit) {
+				trueMessage += line + System.Environment.NewLine;  
+
+				line = ""; //add a line break after   //then reset the current line
+			}
+			line += word + " "; 	//add the current word with a space
+		}
+		trueMessage += line; //add the last line
+
+		return trueMessage;
 	}
 
 
@@ -94,50 +104,31 @@ public class DialogBubble : MonoBehaviour
 	{
 		//if vcurrentbubble is still there, just close it
 		if (activeBubble != null) {
-			if (activeBubble.vClickToCloseBubble) {
-				//get the function to close bubble
-				if (dialogBubble.vCurrentBubble != null) {
-					Appear vAppear = dialogBubble.vCurrentBubble.GetComponent<Appear> ();
-					vAppear.dontCloseBubble = false; //close bubble
+			if (activeBubble.clickToCloseBubble) {
+				if (dialogBubble.currentBubble != null) { //get the function to close bubble
+					Appear appear = dialogBubble.currentBubble.GetComponent<Appear> ();
+					appear.closeBubble = true; //close bubble
 				}
 			}
 		}
 
-		foreach (PixelBubble bubblesList in dialogBubble.bubblesList) {
-			//make sure the bubble isn't already opened
-			if (dialogBubble.vCurrentBubble == null) {
+		foreach (PixelBubble pixelBubble in dialogBubble.bubblesList) {
+			if (dialogBubble.currentBubble == null) { //make sure the bubble isn't already opened
 
-				//cut the message into 24 characters
-				string vTrueMessage = "";
-				string cLine = "";
-				int vLimit = 24;
-				if (bubblesList.vMessageForm == BubbleType.Round) {
-					vLimit = 16;
-				}
+				string trueMessage = ModifyTextFromComponentByAddindNewLineAfterWords (pixelBubble);
 
-				//cut each word in a text in 24 characters.
-				foreach (string vWord in bubblesList.vMessage.Split(' ')) {
-					if (cLine.Length + vWord.Length > vLimit) {
-						vTrueMessage += cLine + System.Environment.NewLine;  
+				GameObject bubblesListObject = InstantiateBubble (pixelBubble, dialogBubble);
 
-						cLine = ""; //add a line break after   //then reset the current line
-					}
-					cLine += vWord + " "; 	//add the current word with a space
-				}
-				vTrueMessage += cLine; //add the last word
+				//show the mouse and wait for the user to left click OR NOT (if not, after X sec, it disappear)
+				bubblesListObject.GetComponent<Appear> ().needToClick = pixelBubble.clickToCloseBubble;
 
-				GameObject bubblesListObject = InstantiateBubble (bubblesList, dialogBubble);
+				RenderBodyOfBubble (bubblesListObject, pixelBubble, trueMessage);
 
-				//show the mouse and wait for the user to left click OR NOT (if not, after 3 sec, it disappear)
-				bubblesListObject.GetComponent<Appear> ().needToClick = bubblesList.vClickToCloseBubble;
-
-				RenderBodyOfBubble (bubblesListObject, bubblesList, vTrueMessage);
-
-				dialogBubble.vCurrentBubble = bubblesListObject; //attach it to the player
+				dialogBubble.currentBubble = bubblesListObject; //attach it to the player
 				bubblesListObject.transform.parent = dialogBubble.transform; //make him his parent
-			} else if (activeBubble == bubblesList && activeBubble.vClickToCloseBubble) {
+			} else if (activeBubble == pixelBubble && activeBubble.clickToCloseBubble) {
 				//gotonextbubble = true;
-				dialogBubble.vCurrentBubble = null;
+				dialogBubble.currentBubble = null;
 			}
 		}
 	}
@@ -154,8 +145,7 @@ public class DialogBubble : MonoBehaviour
 			if (this.transform.childCount == 1) { // odwołujemy się do NPC, który ma już włączoną chmurkę
 
 				if (hit.transform == this.transform
-				    || hit.transform == this.transform.GetChild (0).transform) { // spr. czy klikamy na postać czy jego chmurkę 
-					Debug.Log ("hit transform parent test: " + hit.transform.parent);
+					|| hit.transform == this.transform.GetChild (0).transform) { // spr. czy klikamy na postać czy jego chmurkę 
 					// czy skoro jest już ta chmurka to kliknelismy w chmurke czy gracza:
 					// hierarchia dziedziczenia: NPCs->NPCx->Chmurka
 					if (hit.transform.parent.tag != "NPC") { // ale nie odwołuj się do parenta wszystkich NPC.
@@ -167,13 +157,10 @@ public class DialogBubble : MonoBehaviour
 				}
 			} else { // odwołujemy się do NPC, który nie ma aktywnej chmurki 
 
-				int y = (GameObject.FindGameObjectsWithTag ("Bubble")).Length;
-				Debug.Log ("ilosc: " + y);
+				int currentBubblesCount = (GameObject.FindGameObjectsWithTag ("Bubble")).Length;
 
-				if (hit.transform == this.transform && y < 1) { // to spr. którego klikamy + czy nigdzie indziej nie ma aktywnej
+				if (hit.transform == this.transform && currentBubblesCount < 1) { // to spr. którego klikamy + czy nigdzie indziej nie ma aktywnej
 					// chmurki  // && y < 1  -> z 1 osobą rozmawiać na raz można
-					//check the bubble on the character and make it appear!
-					Debug.Log ("bubblesList " + bubblesList.Count);
 					if (bubblesList.Count > 0) { // jezeli trzeba pokazac wiecej niz 0 chmurek, to je pokaz.
 						ShowBubble (hit.transform.GetComponent<DialogBubble> ());
 					}
