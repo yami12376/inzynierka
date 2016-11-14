@@ -160,7 +160,6 @@ public class DialogBubble : MonoBehaviour
 				if (canTalk) {
 					if (hit.transform == this.transform
 					    || hit.transform == this.transform.GetChild (0).transform) { // spr. czy klikamy na postać czy jego chmurkę 
-						Debug.Log ("in");
 						// czy skoro jest już ta chmurka to kliknelismy w chmurke czy gracza:
 						// hierarchia dziedziczenia: NPCs->NPCx->Chmurka
 						if (hit.transform.parent.tag != "NPC") { // ale nie odwołuj się do parenta wszystkich NPC.

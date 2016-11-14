@@ -16,7 +16,7 @@ public enum BubbleType
 {
 Rectangle,
 	Round}
-;
+
 
 namespace AssemblyCSharp
 {

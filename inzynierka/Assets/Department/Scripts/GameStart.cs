@@ -20,6 +20,10 @@ public class GameStart : MonoBehaviour
 		foreach (Text classNumber in classNumbers) {
 			classNumber.text = "sala200" + randomNumbers.ElementAt (i);
 			i++;
+
+			if(classNumber.text == "sala2005"){
+				classNumber.tag = "Class That I Search For";
+			}
 		}
 	}
 }
