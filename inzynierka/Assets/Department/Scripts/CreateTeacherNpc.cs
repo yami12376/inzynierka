@@ -37,8 +37,10 @@ public class CreateTeacherNpc : MonoBehaviour {
 
 		if (classThatISearchFor != null && !instantiated) {
 			instantiated = true;
-			(Instantiate (teacherNpc, new Vector3 (x, y, -91), Quaternion.identity) as GameObject).transform.parent =
-			GameObject.FindGameObjectWithTag ("NPC").transform;
+
+			GameObject spawnedTeacherNpc = Instantiate (teacherNpc, new Vector3 (x, y, -91), Quaternion.identity) as GameObject;
+			spawnedTeacherNpc.transform.parent = GameObject.FindGameObjectWithTag ("NPC").transform;
+			spawnedTeacherNpc.name="Teacher NPC";
 		}
 	}
 }
