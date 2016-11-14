@@ -23,6 +23,12 @@ public class EnterClass : MonoBehaviour {
 
 			Debug.Log (classNumberText.text);
 
+			if(classNumberText.text == "sala2005"){
+				GameObject entryCanvas = GameObject.FindGameObjectWithTag ("Entry Canvas");
+				Destroy (entryCanvas);
+				}
+
+
 		}
 	}
 
