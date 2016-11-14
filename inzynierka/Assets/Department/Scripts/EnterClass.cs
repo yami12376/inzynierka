@@ -27,18 +27,13 @@ public class EnterClass : MonoBehaviour
 			Debug.Log (classNumberText.text);
 
 			if (classNumberText.text == "sala2005") {
+		
 				GameObject entryCanvas = GameObject.FindGameObjectWithTag ("Entry Canvas");
-				float x = entryCanvas.transform.position.x;
-				float y = entryCanvas.transform.position.y;
-				Destroy (entryCanvas);
+				if (entryCanvas != null) {
+					Destroy (entryCanvas);
+				}
 
-
-				GameObject spawnedCanvas = Instantiate (canvasWhenEnteredToTheClass, new Vector3 (x, y, -91), Quaternion.identity) as GameObject;
-
-				spawnedCanvas.transform.parent = GameObject.FindGameObjectWithTag ("Hero").transform;
-
-
-				spawnedCanvas.transform.localScale = new Vector3(0.008f, 0.008f, 1f);
+				GameObject spawnedCanvas = Instantiate (canvasWhenEnteredToTheClass, new Vector3 (0, 0, 0), Quaternion.identity) as GameObject;
 
 			}
 
