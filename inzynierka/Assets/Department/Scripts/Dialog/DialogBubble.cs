@@ -19,6 +19,8 @@ public class DialogBubble : MonoBehaviour
 	public GameObject prefab;
 	public GameObject prefab2;
 
+	public float distanceFromIcanTalkWithNpc;
+
 
 	private GameObject InstantiateBubble (PixelBubble bubblesList, DialogBubble dialogBubble)
 	{
@@ -73,7 +75,7 @@ public class DialogBubble : MonoBehaviour
 		}
 	}
 
-	public string ModifyTextFromComponentByAddindNewLineAfterWords(PixelBubble pixelBubble)
+	private string ModifyTextFromComponentByAddindNewLineAfterWords(PixelBubble pixelBubble)
 	{
 		//cut the message into 24 characters
 		string trueMessage = "";
@@ -97,10 +99,20 @@ public class DialogBubble : MonoBehaviour
 		return trueMessage;
 	}
 
+	private bool canHeroTalkWithNpcBecauseOfDistanceBetweenThem(Vector3 npcPosition){
+		
+		float distance = Vector2.Distance (npcPosition, GameObject.FindGameObjectWithTag("Hero").transform.position);
+		Debug.Log ("distance: " + distance);
+		if (distance > distanceFromIcanTalkWithNpc) {
+			return false;
+		}
+		return true;
+	}
+
 
 
 	//show the right bubble on the current character
-	void ShowBubble (DialogBubble dialogBubble)
+	private void ShowBubble (DialogBubble dialogBubble)
 	{
 		//if vcurrentbubble is still there, just close it
 		if (activeBubble != null) {
@@ -142,17 +154,26 @@ public class DialogBubble : MonoBehaviour
 
 		if (hit.collider != null && Input.GetMouseButtonDown (0)) {
 
+
+
 			if (this.transform.childCount == 1) { // odwołujemy się do NPC, który ma już włączoną chmurkę
 
-				if (hit.transform == this.transform
-					|| hit.transform == this.transform.GetChild (0).transform) { // spr. czy klikamy na postać czy jego chmurkę 
-					// czy skoro jest już ta chmurka to kliknelismy w chmurke czy gracza:
-					// hierarchia dziedziczenia: NPCs->NPCx->Chmurka
-					if (hit.transform.parent.tag != "NPC") { // ale nie odwołuj się do parenta wszystkich NPC.
-						ShowBubble (hit.transform.parent.GetComponent<DialogBubble> ()); // mozna bezpiecznie odwolac sie do ojca, bo to 
-						// chmurka
-					} else {
-						ShowBubble (hit.transform.GetComponent<DialogBubble> ());
+
+				bool canTalk = canHeroTalkWithNpcBecauseOfDistanceBetweenThem(this.transform.position);
+				Debug.Log (canTalk + " canTalk");
+
+				if (canTalk) {
+					if (hit.transform == this.transform
+					   || hit.transform == this.transform.GetChild (0).transform) { // spr. czy klikamy na postać czy jego chmurkę 
+						Debug.Log ("in");
+						// czy skoro jest już ta chmurka to kliknelismy w chmurke czy gracza:
+						// hierarchia dziedziczenia: NPCs->NPCx->Chmurka
+						if (hit.transform.parent.tag != "NPC") { // ale nie odwołuj się do parenta wszystkich NPC.
+							ShowBubble (hit.transform.parent.GetComponent<DialogBubble> ()); // mozna bezpiecznie odwolac sie do ojca, bo to 
+							// chmurka
+						} else {
+							ShowBubble (hit.transform.GetComponent<DialogBubble> ());
+						}
 					}
 				}
 			} else { // odwołujemy się do NPC, który nie ma aktywnej chmurki 
@@ -160,8 +181,14 @@ public class DialogBubble : MonoBehaviour
 				int currentBubblesCount = (GameObject.FindGameObjectsWithTag ("Bubble")).Length;
 
 				if (hit.transform == this.transform && currentBubblesCount < 1) { // to spr. którego klikamy + czy nigdzie indziej nie ma aktywnej
+
+
+					bool canTalk = canHeroTalkWithNpcBecauseOfDistanceBetweenThem(this.transform.position);
+
+				
+
 					// chmurki  // && y < 1  -> z 1 osobą rozmawiać na raz można
-					if (bubblesList.Count > 0) { // jezeli trzeba pokazac wiecej niz 0 chmurek, to je pokaz.
+					if (bubblesList.Count > 0 && canTalk) { // jezeli trzeba pokazac wiecej niz 0 chmurek, to je pokaz.
 						ShowBubble (hit.transform.GetComponent<DialogBubble> ());
 					}
 				}
