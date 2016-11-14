@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class ManageEntryText : MonoBehaviour
 {
 
-	private int i = 15;
+	public float time = 20;
 
 	// Use this for initialization
 	void Start ()
@@ -17,13 +17,13 @@ public class ManageEntryText : MonoBehaviour
 
 	void ChangeText ()
 	{
-		if (i == 0) {
+		if (time == 0) {
 			Application.LoadLevel ("Menu");
 		}
 		
 		Text text = this.GetComponent<Text> ();
 
-		text.text = "Masz 15 sekund żeby zdążyć na egzamin z analizy matematycznej! Śpiesz się!! Udaj się do sali numer 2005. Pozostały czas = " + i;
-		i--;
+		text.text = "Masz 20 sekund żeby zdążyć na egzamin z analizy matematycznej! Śpiesz się!! Udaj się do sali numer 2005. Pozostały czas = " + time;
+		time--;
 	}
 }
