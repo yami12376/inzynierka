@@ -12,7 +12,11 @@ using UnityEngine;
 using AssemblyCSharp;
 
 //bubble type
-public enum BubbleType{Rectangle, Round};
+public enum BubbleType
+{
+Rectangle,
+	Round}
+;
 
 namespace AssemblyCSharp
 {
@@ -20,7 +24,7 @@ namespace AssemblyCSharp
 	public class PixelBubble
 	{
 		//main message in the bubble
-		public string message = ""; 
+		public string message = "";
 		public BubbleType messageForm = BubbleType.Rectangle;
 		public Color borderColor = Color.black;
 		public Color bodyColor = Color.white;

@@ -13,7 +13,7 @@ public class Appear : MonoBehaviour
 		yield return new WaitForSeconds (time);
 		closeBubble = true;
 	}
-		
+
 	void Update ()  // Update is called once per frame
 	{
 		DialogBubble dialogBubbleScriptComponent = transform.parent.GetComponent<DialogBubble> ();
