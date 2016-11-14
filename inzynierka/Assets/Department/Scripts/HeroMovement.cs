@@ -45,13 +45,28 @@ public class HeroMovement : MonoBehaviour
 
 		bool isWalking = (Mathf.Abs (input_x) + Mathf.Abs (input_y)) > 0;
 
-		animator.SetBool ("isWalking", isWalking);
 
-		if (isWalking) {
+
+		int currentBubblesCount = (GameObject.FindGameObjectsWithTag ("Bubble")).Length;
+
+		Debug.Log ("isWalking: " + isWalking);
+		Debug.Log ("count " + currentBubblesCount);
+
+		if (isWalking && currentBubblesCount<1) {
+
+			Debug.Log ("isWalking: " + isWalking);
+
+			animator.SetBool ("isWalking", isWalking);
+
 			animator.SetFloat ("x", input_x);
 			animator.SetFloat ("y", input_y);
 
 			transform.position += new Vector3 (input_x, input_y, 0).normalized * Time.deltaTime * speed;
+		}
+		else if(isWalking==false ){
+			Debug.Log ("isWalking: " + isWalking);
+
+			animator.SetBool ("isWalking", isWalking);
 		}
 	}
 }
