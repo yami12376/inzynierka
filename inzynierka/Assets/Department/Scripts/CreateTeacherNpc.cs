@@ -1,19 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Text.RegularExpressions;
 
 public class CreateTeacherNpc : MonoBehaviour {
 
 	public GameObject teacherNpc;
 	private bool instantiated;
 
-	// Use this for initialization
-	void Start () {
-
-
-	
-	}
-	
-	// Update is called once per frame
 	void Update () {
 
 		float x = 0;
@@ -33,10 +26,12 @@ public class CreateTeacherNpc : MonoBehaviour {
 			x = classThatISearchFor.transform.position.x + 5;
 			y = classThatISearchFor.transform.position.y - 7;
 		}
-	
 
-		if (classThatISearchFor != null && !instantiated) {
+		if (classThatISearchFor.tag != null && !instantiated) {
 			instantiated = true;
+
+			Debug.Log ("class # = " + classThatISearchFor.tag);
+
 
 			GameObject spawnedTeacherNpc = Instantiate (teacherNpc, new Vector3 (x, y, -91), Quaternion.identity) as GameObject;
 			spawnedTeacherNpc.transform.parent = GameObject.FindGameObjectWithTag ("NPC").transform;
