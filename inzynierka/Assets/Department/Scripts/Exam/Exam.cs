@@ -44,7 +44,7 @@ public class Exam : MonoBehaviour {
 
 		if (!changedTextOfThisQuestion) {
 			changedTextOfThisQuestion = true;
-			if (doesHeroKnowAnswer ()) {
+			if (DoesHeroKnowAnswer ()) {
 				Debug.Log ("zna");
 				knowAnswerText.text = "Postać zna odpowiedź";
 				moveButton.interactable = true;
@@ -61,7 +61,7 @@ public class Exam : MonoBehaviour {
 	}
 
 
-	private bool doesHeroKnowAnswer(){
+	private bool DoesHeroKnowAnswer(){
 
 		Random.Range (0f, 50f);
 
@@ -72,7 +72,7 @@ public class Exam : MonoBehaviour {
 
 		Debug.Log ("points " + points);
 
-		points += 45;
+		points += 65;
 
 		if (points > 60) {
 			return true;
@@ -83,7 +83,7 @@ public class Exam : MonoBehaviour {
 
 	}
 
-	public void changeQuestion(){
+	public void ChangeQuestion(){
 
 		textComponents [0].text = "bla bla";
 
