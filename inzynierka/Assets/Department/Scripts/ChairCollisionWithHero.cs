@@ -19,6 +19,7 @@ public class ChairCollisionWithHero : MonoBehaviour
 
 			Debug.Log ("przeniesienie do sceny egzaminu 2.");
 			Debug.Log ("cheat: " + Stats.Cheating);
+			Application.LoadLevel ("Exam");
 		}
 	}
 

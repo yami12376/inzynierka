@@ -23,7 +23,7 @@ public class ManageEntryText : MonoBehaviour
 		
 		Text text = this.GetComponent<Text> ();
 
-		text.text = "Masz 20 sekund żeby zdążyć na egzamin z analizy matematycznej! Śpiesz się!! Udaj się do sali numer 2005. Pozostały czas = " + time;
+		text.text = "Masz 20 sekund żeby zdążyć na egzamin z podstaw programowania! Śpiesz się!! Udaj się do sali numer 2005. Pozostały czas = " + time;
 		time--;
 	}
 }
