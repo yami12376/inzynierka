@@ -20,9 +20,10 @@ public class HeroMovement : MonoBehaviour
 
 	void FixedUpdate ()
 	{
-		if (Input.GetKey (KeyCode.LeftShift)) {
+
+		if (Input.GetButton("Run") ) {
 			running = true;
-		} else if (!Input.GetKey (KeyCode.LeftShift)) {
+		} else  {
 			running = false;
 		}
 
