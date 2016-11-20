@@ -84,14 +84,12 @@ public class Exam : MonoBehaviour {
 		Debug.Log ("points " + points);
 
 
-		if (points > 1) {
+		if (points > 60) {
 			correctAnswers++;
 			return true;
 		} else {
 			return false;
 		}
-
-
 	}
 
 	private bool DoesCheatSucced(){ // cheat max 10 pkt * 5
@@ -114,10 +112,12 @@ public class Exam : MonoBehaviour {
 
 		Debug.Log ("points " + points);
 
-		if (points > 50) {
+		if (points > 60) {
 			correctAnswers++;
+			textComponents [4].text = "Udało Ci się trafić we właściwą odpowiedź! Poprawna odpowiedź to : " + correctAnswersArray[currentQuestionNumber-1];
 			return true;
 		} else {
+			textComponents [4].text = "Nie udało Ci się trafić we właściwą odpowiedź! Poprawna odpowiedź to : " + correctAnswersArray[currentQuestionNumber-1];
 			return false;
 		}
 	}
@@ -141,20 +141,20 @@ public class Exam : MonoBehaviour {
 			if (correctAnswers == 1) {
 				if (questionsNumber / 2 <= correctAnswers) {
 					textComponents [0].text = "koniec egzaminu. Postać odpowiedziała poprawnie: " + correctAnswers + " raz. Na " +
-						questionsNumber + " pytań. Zdałeś egzamin. Koniec gry, udaj się do menu, aby zagrać ponownie.";
+						questionsNumber + " pytań. Postać zdała egzamin. Koniec gry, udaj się do menu, aby zagrać ponownie.";
 				} else {
 					
 					textComponents [0].text = "koniec egzaminu. Postać odpowiedziała poprawnie: " + correctAnswers + " raz. Na " +
-						questionsNumber + " pytań. Nie Zdałeś egzaminu. Koniec gry, udaj się do menu, aby zagrać ponownie.";
+						questionsNumber + " pytań. Postać nie zdała egzaminu. Koniec gry, udaj się do menu, aby zagrać ponownie.";
 				}
 			} else {
 				if (questionsNumber / 2 <= correctAnswers) {
 					textComponents [0].text = "koniec egzaminu. Postać odpowiedziała poprawnie: " + correctAnswers + " razy. Na " +
-						questionsNumber + " pytań. Zdałeś egzamin. Koniec gry, udaj się do menu, aby zagrać ponownie.";
+						questionsNumber + " pytań. Postać zdała egzamin. Koniec gry, udaj się do menu, aby zagrać ponownie.";
 				} else {
 
 					textComponents [0].text = "koniec egzaminu. Postać odpowiedziała poprawnie: " + correctAnswers + " razy. Na " +
-						questionsNumber + " pytań. Nie Zdałeś egzaminu. Koniec gry, udaj się do menu, aby zagrać ponownie.";
+						questionsNumber + " pytań. Postać nie zdała egzaminu. Koniec gry, udaj się do menu, aby zagrać ponownie.";
 				}
 			}
 
@@ -189,7 +189,7 @@ public class Exam : MonoBehaviour {
 
 		if (!cheatSucced) {
 
-			textComponents [0].text = "Zostałeś przyłapany na ściąganiu. Nie zdałeś egzaminu.";
+			textComponents [0].text = "Postać została przyłapana na ściąganiu. Nie zdała egzaminu.";
 
 			goBackToMenuButton.gameObject.SetActive (true);
 
@@ -209,12 +209,11 @@ public class Exam : MonoBehaviour {
 
 	public void Shoot(){
 
-		// changedTextOfThisQuestion = false;
-
 		shootButton.interactable = false;
 		cheatButton.interactable = false;
 
 		bool shootSucced = DoesShootSucced ();
+
 
 		Debug.Log ("Strzał się udał? " + shootSucced);
 
