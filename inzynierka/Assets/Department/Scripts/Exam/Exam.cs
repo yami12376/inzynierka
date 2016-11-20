@@ -19,6 +19,8 @@ public class Exam : MonoBehaviour {
 
 	private int currentQuestionNumber;
 
+	private string[] correctAnswersArray;
+
 	void Start(){
 		textComponents = this.GetComponentsInChildren<Text> ();
 	    buttonComponents = this.GetComponentsInChildren<Button> ();
@@ -30,7 +32,13 @@ public class Exam : MonoBehaviour {
 
 		goBackToMenuButton.gameObject.SetActive (false);
 
+
+
 		currentQuestionNumber = 1;
+		Debug.Log ("teraz pytanie numer = " + currentQuestionNumber);
+
+
+		correctAnswersArray = new string[3]{"d","b","b"};
 	}
 		
 	// Update is called once per frame
@@ -41,10 +49,7 @@ public class Exam : MonoBehaviour {
 
 		string text = textComponent.text;
 		char questionNumber = text [0];
-		Debug.Log ("number = " + questionNumber);
 
-		Debug.Log("cheatStat = " + Stats.Cheating);
-		Debug.Log("Wisdomtat = " + Stats.Knowledge);
 
 
 
@@ -52,7 +57,12 @@ public class Exam : MonoBehaviour {
 			changedTextOfThisQuestion = true;
 			if (DoesHeroKnowAnswer ()) {
 				Debug.Log ("zna");
-				knowAnswerText.text = "Postać zna odpowiedź";
+
+				Debug.Log ("poprawna odpowiedx = " + correctAnswersArray[currentQuestionNumber-1]);
+
+				Debug.Log ("poprawna odpowiedx = " + correctAnswersArray[1]);
+
+				knowAnswerText.text = "Postać zna odpowiedź, jest nią odpowiedź: " + correctAnswersArray[currentQuestionNumber-1];
 				moveButton.interactable = true;
 
 			} else {
@@ -67,19 +77,14 @@ public class Exam : MonoBehaviour {
 	}
 
 
-	private bool DoesHeroKnowAnswer(){
-
-		Random.Range (0f, 50f);
-
-		// wiedza max 10 pkt * 5
-
+	private bool DoesHeroKnowAnswer(){ 		// wiedza max 10 pkt * 5
 
 		float points = Stats.Knowledge * 5 + Random.Range (0f, 50f);
 
 		Debug.Log ("points " + points);
 
 
-		if (points > 60) {
+		if (points > 1) {
 			correctAnswers++;
 			return true;
 		} else {
@@ -89,12 +94,7 @@ public class Exam : MonoBehaviour {
 
 	}
 
-	private bool DoesCheatSucced(){
-
-		Random.Range (0f, 50f);
-
-		// cheat max 10 pkt * 5
-
+	private bool DoesCheatSucced(){ // cheat max 10 pkt * 5
 
 		float points = Stats.Cheating * 5 + Random.Range (0f, 50f);
 
@@ -106,21 +106,13 @@ public class Exam : MonoBehaviour {
 		} else {
 			return false;
 		}
-
-
 	}
 
-	private bool DoesShootSucced(){
-
-
-		//  4 odpowiedzi = 25%
-
+	private bool DoesShootSucced(){ //  4 odpowiedzi = 25%
 
 		float points = Random.Range (0f, 100f);
 
 		Debug.Log ("points " + points);
-
-
 
 		if (points > 50) {
 			correctAnswers++;
@@ -128,15 +120,15 @@ public class Exam : MonoBehaviour {
 		} else {
 			return false;
 		}
-
-
 	}
 
 	public void ChangeQuestion(){
 
-		currentQuestionNumber++;
 
+		Debug.Log ("teraz pytanie numer = " + currentQuestionNumber);
+		++currentQuestionNumber;
 
+		Debug.Log ("teraz pytanie numer = " + currentQuestionNumber);
 		shootButton.interactable = false;
 		cheatButton.interactable = false;
 		moveButton.interactable = false;
@@ -177,26 +169,15 @@ public class Exam : MonoBehaviour {
 		else{
 			changedTextOfThisQuestion = false;
 
-			textComponents [0].text = "bla bla";
-
+			textComponents [0].text = ChangeQuestionText (currentQuestionNumber);
 		}
-
-
-	
 
 
 		Debug.Log ("teraz pytanie numer = " + currentQuestionNumber);
 
-		if (currentQuestionNumber > questionsNumber) {
-
-			// zmiana sceny do wyniku
-		}
-
 	}
 
 	public void Cheat(){
-
-		// changedTextOfThisQuestion = false;
 
 		shootButton.interactable = false;
 		cheatButton.interactable = false;
@@ -213,17 +194,15 @@ public class Exam : MonoBehaviour {
 			goBackToMenuButton.gameObject.SetActive (true);
 
 		} else {
-			textComponents [4].text = "Udało Ci się sciągnąć !";
+			Debug.Log (" correctAnswersArray[currentQuestionNumber-1] " +  correctAnswersArray[currentQuestionNumber-1]);
+			Debug.Log ("currentQuestionNumber " +  currentQuestionNumber);
+			Debug.Log (" correctAnswersArray[2] " +  correctAnswersArray[2]);
+			textComponents [4].text = "Udało Ci się sciągnąć! Zaznaczyłeś odpowiedź: " + correctAnswersArray[currentQuestionNumber-1];
 			moveButton.interactable = true;
 		}
 	
 
 		Debug.Log ("teraz pytanie numer = " + currentQuestionNumber);
-
-		if (currentQuestionNumber > questionsNumber) {
-
-			// zmiana sceny do wyniku
-		}
 
 	}
 
@@ -251,6 +230,41 @@ public class Exam : MonoBehaviour {
 
 	}
 
+	public string ChangeQuestionText(int currentQuestionNumber){
+
+		if (currentQuestionNumber == 2) {
+			// final public class Test {}, czyli b
+			return @"
+	2.	
+	Która opcja jest poprawną deklaracją dla niezagnieżdżonych klas lub interfejsów?
+		a) final abstract class Test {}
+		b) final public class Test {}
+		c) protected abstract class Test {}
+		d) protected interface Test {}";
+
+		} else if (currentQuestionNumber == 3) {
+			return @"
+		3. Jakie będzie wyjście programu?
+			public class Test 
+			{ 
+				private static float[] f = new float[2]; 
+				public static void main (String[] args) 
+				{
+					System.out.println('f[0] = ' + f[0]); 
+				} 
+			}
+
+			a).	f[0] = 0
+			b).	f[0] = 0.0
+			c).	 Compile Error
+			d).	Runtime Exception";
+
+		}
+		else{
+
+			return "błąd brak pytania.";
+		}
+	}
 
 
 }
